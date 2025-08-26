@@ -21,7 +21,39 @@ alias pamcan pacman
 alias ls 'eza --icons'
 alias clear "printf '\033[2J\033[3J\033[1;1H'"
 alias q 'qs -c ii'
-    
+
+
+# Configuration nnn
+set -gx NNN_PLUG "v:imgprev;i:preview-tui"
+set -gx NNN_FIFO "/tmp/nnn.fifo"
+set -gx SPLIT "v"  # Split vertical pour preview
+set -gx VISUAL micro
+set -gx EDITOR micro
+
+# Fonction nnn avec cd
+function nnn
+    # Block nesting of nnn in subshells
+    if test -n "$NNNLVL" -a "$NNNLVL" -ge 1
+        echo "nnn is already running"
+        return
+    end
+
+    # The behaviour is set to cd on quit (nnn checks if NNN_TMPFILE is set)
+    set -x NNN_TMPFILE ~/.config/nnn/.lastd
+
+    # Run nnn
+    command nnn -P i $argv
+
+    # cd on quit
+    if test -e $NNN_TMPFILE
+        source $NNN_TMPFILE
+        rm $NNN_TMPFILE
+    end
+end
+# Variables pour imgpreview avec Kitty
+set -gx NNN_TERMINAL "kitty"
+set -gx GUI 1
+
 
 # function fish_prompt
 #   set_color cyan; echo (pwd)

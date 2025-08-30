@@ -1,1 +1,14 @@
-{}
+{
+  "custom/powerprofile": {
+    "icon": {
+      "power-saver": "󰌪",
+      "balanced": "",
+      "performance": "󱎓"
+    },
+    "label": "{}",
+    "tooltip": "Power Profile",
+    "class": "power-profile-module",
+    "interval": 5000,
+    "execute": "powerprofilesctl get | awk '{print $1}' | xargs -I{} echo '{\"alt\": \"{}\"}'"
+  }
+}

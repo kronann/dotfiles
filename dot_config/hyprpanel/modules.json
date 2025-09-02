@@ -9,6 +9,9 @@
     "tooltip": "Power Profile",
     "class": "power-profile-module",
     "interval": 5000,
-    "execute": "powerprofilesctl get | awk '{print $1}' | xargs -I{} echo '{\"alt\": \"{}\"}'"
+    "execute": "powerprofilesctl get | awk '{print $1}' | xargs -I{} echo '{\"alt\": \"{}\"}'",
+    "actions": {
+      "onLeftClick": "~/.config/hyprpanel/scripts/cycle-power-profile.sh"
+    }
   }
 }

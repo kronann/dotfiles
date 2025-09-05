@@ -7,7 +7,7 @@ case "$current" in
         ;;
     "balanced")
         powerprofilesctl set performance
-        echo "performance"  
+        echo "performance"
         ;;
     "performance")
         powerprofilesctl set power-saver

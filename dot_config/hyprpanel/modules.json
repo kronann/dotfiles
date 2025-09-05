@@ -1,17 +1,19 @@
 {
   "custom/powerprofile": {
     "icon": {
-      "power-saver": "󰌪",
-      "balanced": "",
-      "performance": "󱎓"
+      "power-saver": "󰌪 ",
+      "balanced": " ",
+      "performance": "󱎓 "
     },
-    "label": "{}",
-    "tooltip": "Power Profile",
+    "label": "{percentage}%",
+    "tooltip": "Power Profile {percentage}",
     "class": "power-profile-module",
     "interval": 5000,
-    "execute": "powerprofilesctl get | awk '{print $1}' | xargs -I{} echo '{\"alt\": \"{}\"}'",
+    "execute": "~/.config/hyprpanel/scripts/battery.sh",
     "actions": {
-      "onLeftClick": "~/.config/hyprpanel/scripts/cycle-power-profile.sh"
+      "onLeftClick": "~/.config/hyprpanel/scripts/cycle-power-profile.sh",
+      "onScrollUp": "brightnessctl -d amdgpu_bl2 set +5%",
+      "onScrollDown": "brightnessctl -d amdgpu_bl2 set 5%-"
     }
   }
 }

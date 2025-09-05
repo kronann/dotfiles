@@ -1,7 +1,5 @@
 {
-  "bar.customModules.storage.paths": [
-    "/"
-  ],
+  "bar.customModules.storage.paths": ["/"],
   "theme.font.name": "JetBrainsMonoNL Nerd Font",
   "theme.font.label": "JetBrainsMonoNL Nerd Font",
   "menus.transition": "crossfade",
@@ -428,17 +426,8 @@
   "theme.osd.monitor": 0,
   "bar.layouts": {
     "0": {
-      "left": [
-        "workspaces",
-        "windowtitle",
-        "custom/volume"
-      ],
-      "middle": [
-        "kbinput",
-        "clock",
-        "battery",
-        "custom/powerprofile"
-      ],
+      "left": ["workspaces", "windowtitle", "custom/volume"],
+      "middle": ["kbinput", "clock", "custom/powerprofile"],
       "right": [
         "cputemp",
         "cpu",

@@ -12,8 +12,8 @@
     "execute": "~/.config/hyprpanel/scripts/battery.sh",
     "actions": {
       "onLeftClick": "~/.config/hyprpanel/scripts/cycle-power-profile.sh",
-      "onScrollUp": "brightnessctl -d amdgpu_bl2 set +5%",
-      "onScrollDown": "brightnessctl -d amdgpu_bl2 set 5%-"
+      "onScrollUp": "brightnessctl -d nvidia_0 set +5%",
+      "onScrollDown": "brightnessctl -c backlight set 5%-"
     }
   }
 }

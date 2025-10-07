@@ -2715,6 +2715,6 @@ map f1 launch --cwd=current fish
 
 
 # BEGIN_KITTY_THEME
-# Apprentice
+# Argonaut
 include current-theme.conf
 # END_KITTY_THEME

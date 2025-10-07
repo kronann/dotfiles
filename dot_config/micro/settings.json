@@ -1,0 +1,12 @@
+{
+    "/etc/*": {
+        "filetype": "conf"
+    },
+    "/home/*/.config/*": {
+        "filetype": "conf"
+    },
+    "autosu": true,
+    "colorscheme": "catppuccin-mocha",
+    "fakecursor": true,
+    "mkparents": true
+}

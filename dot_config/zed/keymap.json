@@ -1,0 +1,83 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      // "shift shift": "file_finder::Toggle"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      // "j k": "vim::NormalBefore"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-/": [
+        "editor::ToggleComments",
+        {
+          "advance_downwards": false
+        }
+      ]
+    }
+  },
+  {
+    "bindings": {
+      "ctrl-o ctrl-k": "editor::OpenFile"
+    }
+  },
+  {
+    "bindings": {
+      "ctrl-shift-o": "editor::OpenFile"
+    }
+  },
+  {
+    "bindings": {
+      "ctrl-shift-o": "workspace::OpenFiles"
+    }
+  },
+  {
+    "bindings": {
+      "ctrl-alt-o": "editor::AutoIndent"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "alt-j": [
+        "editor::SelectNext",
+        {
+          "replace_newest": false
+        }
+      ]
+    }
+  },
+  {
+    "bindings": {
+      "ctrl-d": "editor::DeleteToEndOfLine"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-alt-o": [
+        "editor::ToggleCodeActions",
+        {}
+      ]
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-b": "editor::GoToDefinition"
+    }
+  }
+]

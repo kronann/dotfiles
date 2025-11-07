@@ -136,14 +136,13 @@ Variants {
                 "--height", contentHeight,
                 "--horizontal-padding", horizontalPadding,
                 "--vertical-padding", verticalPadding,
-                path, 
+                path,
                 // "--visual-output",
             ]
             stdout: StdioCollector {
                 id: leastBusyRegionOutputCollector
                 onStreamFinished: {
                     const output = leastBusyRegionOutputCollector.text
-                    // console.log("[Background] Least busy region output:", output)
                     if (output.length === 0) return;
                     const parsedContent = JSON.parse(output)
                     bgRoot.clockX = parsedContent.center_x * bgRoot.effectiveWallpaperScale

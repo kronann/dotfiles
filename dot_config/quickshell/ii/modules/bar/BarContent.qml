@@ -6,6 +6,7 @@ import Quickshell.Services.UPower
 import qs
 import qs.services
 import qs.modules.common
+import qs.modules.customs
 import qs.modules.common.widgets
 import qs.modules.common.functions
 
@@ -78,9 +79,9 @@ Item { // Bar content region
         WheelHandler {
             onWheel: event => {
                 if (event.angleDelta.y < 0)
-                    root.brightnessMonitor.setBrightness(root.brightnessMonitor.brightness - 0.05);
+                    root.brightnessMonitor.setBrightness(root.brightnessMonitor.brightness - 0.01);
                 else if (event.angleDelta.y > 0)
-                    root.brightnessMonitor.setBrightness(root.brightnessMonitor.brightness + 0.05);
+                    root.brightnessMonitor.setBrightness(root.brightnessMonitor.brightness + 0.01);
                 // Store the mouse position and start tracking
                 barLeftSideMouseArea.lastScrollX = event.x;
                 barLeftSideMouseArea.lastScrollY = event.y;
@@ -98,7 +99,7 @@ Item { // Bar content region
                 }
             }
         }
-        
+
         // Visual content
         ScrollHint {
             reveal: barLeftSideMouseArea.hovered
@@ -233,8 +234,13 @@ Item { // Bar content region
                     visible: (Config.options.bar.verbose && root.useShortenedForm === 0)
                     Layout.alignment: Qt.AlignVCenter
                 }
-
+                /*
                 BatteryIndicator {
+                    visible: (root.useShortenedForm < 2 && UPower.displayDevice.isLaptopBattery)
+                    Layout.alignment: Qt.AlignVCenter
+                }
+*/
+                PowerProfile {
                     visible: (root.useShortenedForm < 2 && UPower.displayDevice.isLaptopBattery)
                     Layout.alignment: Qt.AlignVCenter
                 }
@@ -275,6 +281,7 @@ Item { // Bar content region
         // Scroll to change volume
         WheelHandler {
             onWheel: event => {
+                /*
                 const currentVolume = Audio.value;
                 const step = currentVolume < 0.1 ? 0.01 : 0.02 || 0.2;
                 if (event.angleDelta.y < 0)
@@ -282,6 +289,18 @@ Item { // Bar content region
                 else if (event.angleDelta.y > 0)
                     Audio.sink.audio.volume = Math.min(1, Audio.sink.audio.volume + step);
                 // Store the mouse position and start tracking
+                barRightSideMouseArea.lastScrollX = event.x;
+                barRightSideMouseArea.lastScrollY = event.y;
+                barRightSideMouseArea.trackingScroll = true;
+*/
+                const step = 0.01;  // 1% par scroll
+
+                if (event.angleDelta.y < 0) {
+                    Audio.sink.audio.volume = Math.max(0, Audio.sink.audio.volume - step);
+                } else if (event.angleDelta.y > 0) {
+                    Audio.sink.audio.volume = Math.min(1, Audio.sink.audio.volume + step);
+                }
+
                 barRightSideMouseArea.lastScrollX = event.x;
                 barRightSideMouseArea.lastScrollY = event.y;
                 barRightSideMouseArea.trackingScroll = true;

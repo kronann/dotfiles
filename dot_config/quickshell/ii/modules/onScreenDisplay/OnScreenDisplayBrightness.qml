@@ -29,7 +29,7 @@ Scope {
             GlobalStates.osdBrightnessOpen = false
         }
     }
-    
+
     Connections {
         target: Audio.sink?.audio ?? null
         function onVolumeChanged() {

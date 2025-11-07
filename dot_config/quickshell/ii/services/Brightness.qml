@@ -29,6 +29,8 @@ Singleton {
     function increaseBrightness(): void {
         const focusedName = Hyprland.focusedMonitor.name;
         const monitor = monitors.find(m => focusedName === m.screen.name);
+               console.log("INC ------- " +  monitor);
+
         if (monitor)
             monitor.setBrightness(monitor.brightness + 0.05);
     }
@@ -36,6 +38,7 @@ Singleton {
     function decreaseBrightness(): void {
         const focusedName = Hyprland.focusedMonitor.name;
         const monitor = monitors.find(m => focusedName === m.screen.name);
+        console.log("DEC ------- " +  monitor);
         if (monitor)
             monitor.setBrightness(monitor.brightness - 0.05);
     }
@@ -107,7 +110,8 @@ Singleton {
             if (Math.round(brightness * 100) === rounded)
                 return;
             brightness = value;
-            setProc.command = isDdc ? ["ddcutil", "-b", busNum, "setvcp", "10", rounded] : ["brightnessctl", "s", `${rounded}%`, "--quiet"];
+            setProc.command = isDdc ? ["ddcutil", "-b", busNum, "setvcp", "10", rounded] : ["brightnessctl", "-d", "amdgpu_bl2", "s", `${rounded}%`, "--quiet"];
+            console.log("2 setProc.command", setProc.command);
             setProc.startDetached();
         }
 

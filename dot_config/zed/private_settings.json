@@ -22,5 +22,15 @@
   },
   "autosave": "on_focus_change",
   "format_on_save": "on",
-  "formatter": "prettier"
+  "formatter": "prettier",
+  "lsp": {
+    "tailwindcss-language-server": {
+      "settings": {
+        "classFunctions": ["cva", "cx"],
+        "experimental": {
+          "classRegex": ["[cls|className]\\s\\:\\=\\s\"([^\"]*)"]
+        }
+      }
+    }
+  }
 }

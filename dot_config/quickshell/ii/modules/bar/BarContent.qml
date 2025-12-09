@@ -9,6 +9,8 @@ import qs.modules.common
 import qs.modules.customs
 import qs.modules.common.widgets
 import qs.modules.common.functions
+import "./../sidebarRight/quickToggles/"
+import QtQuick.Controls
 
 Item { // Bar content region
     id: root
@@ -64,6 +66,7 @@ Item { // Bar content region
         propagateComposedEvents: true
         onEntered: event => {
             barLeftSideMouseArea.hovered = true;
+            tooltipNetDevice2.hoverTarget = barLeftSideMouseArea;
         }
         onExited: event => {
             barLeftSideMouseArea.hovered = false;
@@ -267,10 +270,14 @@ Item { // Bar content region
         propagateComposedEvents: true
         onEntered: event => {
             barRightSideMouseArea.hovered = true;
+           // toto.visible = true;
+           // stylePopupToto.visible = true;
+
         }
         onExited: event => {
             barRightSideMouseArea.hovered = false;
             barRightSideMouseArea.trackingScroll = false;
+            toto.visible = false;
         }
         onPressed: event => {
             if (event.button === Qt.LeftButton) {
@@ -281,18 +288,6 @@ Item { // Bar content region
         // Scroll to change volume
         WheelHandler {
             onWheel: event => {
-                /*
-                const currentVolume = Audio.value;
-                const step = currentVolume < 0.1 ? 0.01 : 0.02 || 0.2;
-                if (event.angleDelta.y < 0)
-                    Audio.sink.audio.volume -= step;
-                else if (event.angleDelta.y > 0)
-                    Audio.sink.audio.volume = Math.min(1, Audio.sink.audio.volume + step);
-                // Store the mouse position and start tracking
-                barRightSideMouseArea.lastScrollX = event.x;
-                barRightSideMouseArea.lastScrollY = event.y;
-                barRightSideMouseArea.trackingScroll = true;
-*/
                 const step = 0.01;  // 1% par scroll
 
                 if (event.angleDelta.y < 0) {
@@ -336,7 +331,7 @@ Item { // Bar content region
 
             RippleButton { // Right sidebar button
                 id: rightSidebarButton
-
+                hoverEnabled: true
                 Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
                 Layout.rightMargin: Appearance.rounding.screenRounding
                 Layout.fillWidth: false
@@ -367,6 +362,24 @@ Item { // Bar content region
                     anchors.centerIn: parent
                     property real realSpacing: 15
                     spacing: 0
+                    Rectangle {
+                        opacity: 0
+                        anchors.fill: parent
+                        MouseArea {
+                            id: toolTipNetDeviceArea
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            propagateComposedEvents: true
+
+                            onPressed: (mouse)=> {
+                                mouse.accepted = false
+                            }
+                        }
+                        ToolTipNetDevice {
+                            id: tooltipNetDevice
+                            hoverTarget: toolTipNetDeviceArea
+                        }
+                    }
 
                     Revealer {
                         reveal: Audio.sink?.audio?.muted ?? false
@@ -404,6 +417,7 @@ Item { // Bar content region
                             color: rightSidebarButton.colText
                         }
                     }
+
                     MaterialSymbol {
                         Layout.rightMargin: indicatorsRowLayout.realSpacing
                         text: Network.materialSymbol

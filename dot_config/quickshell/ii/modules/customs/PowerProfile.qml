@@ -25,7 +25,7 @@ Rectangle {
     }
 
     property string profile: ""
-    property string displayText: (icons[profile] || "❓") + batteryPercent + "%"
+    property string displayText: (icons[profile] || "❓") + batteryPercent.toFixed(0) + "%"
 
     property real batteryPercent: UPower.displayDevice.percentage * 100
 

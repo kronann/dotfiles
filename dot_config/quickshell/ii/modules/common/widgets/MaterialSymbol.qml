@@ -12,7 +12,7 @@ Text {
         family: Appearance?.font.family.iconMaterial ?? "Material Symbols Rounded"
         pixelSize: iconSize
         weight: Font.Normal + (Font.DemiBold - Font.Normal) * fill
-        variableAxes: { 
+        variableAxes: {
             "FILL": truncatedFill,
             // "wght": font.weight,
             // "GRAD": 0,

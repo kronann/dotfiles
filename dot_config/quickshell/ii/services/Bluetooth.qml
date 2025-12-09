@@ -4,6 +4,7 @@ pragma ComponentBehavior: Bound
 import Quickshell;
 import Quickshell.Io;
 import QtQuick;
+import Quickshell.Bluetooth
 
 /**
  * Basic polled Bluetooth state.
@@ -16,11 +17,18 @@ Singleton {
     property string bluetoothDeviceAddress: ""
     property bool bluetoothEnabled: false
     property bool bluetoothConnected: false
+    property string bluetoothDevicesName: ""
 
     function update() {
         updateBluetoothDevice.running = true
         updateBluetoothStatus.running = true
         updateBluetoothEnabled.running = true
+        getBluetoothConnectedDevices.running = true
+    }
+
+
+    function getBluetoothDevices() {
+        return root.bluetoothDevicesName;
     }
 
     Timer {
@@ -70,4 +78,17 @@ Singleton {
             }
         }
     }
+
+    Process {
+        id: getBluetoothConnectedDevices
+        command: ["sh", "-c", "bluetoothctl info | awk -F': ' '/Name: /{name=$2} /Connected: yes/ {print name}'"]
+        running: true
+        stdout: StdioCollector {
+            id: cycleStdout
+            onStreamFinished: {
+                root.bluetoothDevicesName = text.trim()
+            }
+        }
+    }
+
 }
